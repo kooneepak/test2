@@ -69,6 +69,23 @@ int Institution_select(LinkedList *inputList , LinkedList *outputList, void *cri
 	}
 	
 }
+
+int wasEstablishedBefore(void *elem1, void *year){
+
+	Institution *tempElem = (Institution *) elem1;
+	
+	if(tempElem->yearEstablished < *(int *)year)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+
+
+
+}
 	
 	
 	

@@ -4,6 +4,7 @@
 #include "mock_LinkedList.h"
 #include "mock_Stack.h"
 
+
 void setUp(){}
 void tearDown(){}
 
@@ -137,23 +138,29 @@ void test_institution_select_will_pass_out_the_institution(){
 	
 
 }
-/*
-void test_institution_select_will_pass_out_the_institution_when_there_are_2_input(){
-			LinkedList input = {};
-			LinkedList output = {};
-			
-		Institution institution1[]= {{.type = University},{.type = UniversityCollege}};
 
-		List_removeHead_ExpectAndReturn(&input,&institution1[0]);
-	    Stack_push_Expect(&stack,&institution1[0]);
-		List_removeHead_ExpectAndReturn(&input,&institution1[1]);
-		List_removeHead_ExpectAndReturn(&input,NULL);
+void test_wasEstablishBefore_should_return_one_if_institution_was_established_before_2000(){
 
-		Stack_pop_ExpectAndReturn(&stack,&institution1[0]);
-		List_addTail_Expect(&output ,&institution1[0]);
-
-		Institution_select(&input,&output,&institution1,isUniversityCollege);
+		Institution institution1 = {.yearEstablished = 1999};
+	
+		int year= 2000;
+	
 		
+		TEST_ASSERT_EQUAL(1,wasEstablishedBefore(&institution1, &year));
 
+	
 }
-*/
+
+void test_wasEstablishBefore_should_return_zero_if_institution_was_established_after_2000(){
+
+		Institution institution1 = {.yearEstablished = 2004};
+	
+		int year= 2000;
+	
+		
+		TEST_ASSERT_EQUAL(0,wasEstablishedBefore(&institution1, &year));
+
+	
+}
+
+
