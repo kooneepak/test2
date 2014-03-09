@@ -2,6 +2,7 @@
 #include "Institution.h"
 #include "Linkedlist.h"
 #include "Stack.h"
+#include "CException.h"
 
 
 Stack stack;
@@ -74,6 +75,13 @@ int wasEstablishedBefore(void *elem1, void *year){
 
 	Institution *tempElem = (Institution *) elem1;
 	
+	
+	if(tempElem->yearEstablished > 2014){
+	
+		Throw(ERROR_ESTABLISHED);
+	
+	}
+		
 	if(tempElem->yearEstablished < *(int *)year)
 	{
 		return 1;
@@ -82,10 +90,10 @@ int wasEstablishedBefore(void *elem1, void *year){
 	{
 		return 0;
 	}
-
-
-
+	
 }
+
+
 	
 	
 	

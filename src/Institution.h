@@ -2,11 +2,13 @@
 #define __INSTITUTION_H__
 #include "Stack.h"
 #include "LinkedList.h"
+#include "CException.h"
 
 
 extern Stack stack;
 
 typedef enum {Unknown , University , UniversityCollege , college}InstitutionType;
+		enum {ERROR_ESTABLISHED};
 
 typedef struct Institution_t{
 

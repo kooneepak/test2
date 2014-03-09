@@ -3,6 +3,7 @@
 #include "Institution.h"
 #include "mock_LinkedList.h"
 #include "mock_Stack.h"
+#include "CException.h"
 
 
 void setUp(){}
@@ -139,11 +140,11 @@ void test_institution_select_will_pass_out_the_institution(){
 
 }
 
-void test_wasEstablishBefore_should_return_one_if_institution_was_established_before_2000(){
+void test_wasEstablishBefore_should_return_one_if_institution_was_established_before_2014(){
 
 		Institution institution1 = {.yearEstablished = 1999};
 	
-		int year= 2000;
+		int year= 2014;
 	
 		
 		TEST_ASSERT_EQUAL(1,wasEstablishedBefore(&institution1, &year));
@@ -151,16 +152,61 @@ void test_wasEstablishBefore_should_return_one_if_institution_was_established_be
 	
 }
 
-void test_wasEstablishBefore_should_return_zero_if_institution_was_established_after_2000(){
+void test_wasEstablishBefore_should_return_zero_if_institution_was_established_after_2014(){
 
-		Institution institution1 = {.yearEstablished = 2004};
+		Institution institution1 = {.yearEstablished = 2014};
 	
-		int year= 2000;
+		int year= 1999;
 	
 		
 		TEST_ASSERT_EQUAL(0,wasEstablishedBefore(&institution1, &year));
 
 	
 }
+
+void test_institution_select_will_pass_out_the_institution_yearEstablished_before_2014(){
+
+			LinkedList input = {};
+			LinkedList output = {};
+			
+		Institution institution1 = {.yearEstablished = 1998};
+		int year = 2014;
+		
+		List_removeHead_ExpectAndReturn(&input,&institution1);
+		Stack_push_Expect(&stack,&institution1);
+		List_removeHead_ExpectAndReturn(&input,NULL);
+
+		Stack_pop_ExpectAndReturn(&stack,&institution1);
+		List_addTail_Expect(&output ,&institution1);
+
+		Institution_select(&input,&output,&year,wasEstablishedBefore);
+	
+
+}
+
+void test_institution_select_will_throw_exception_if_the_institution_yearEstablished_after_2014(){
+
+			LinkedList input = {};
+			LinkedList output = {};
+			int excp;
+			
+		Institution institution1 = {.yearEstablished = 2015};
+		
+		int year = 2014;
+		
+		
+		List_removeHead_ExpectAndReturn(&input,&institution1);
+	
+	
+		Try{	
+		Institution_select(&input,&output,&year,wasEstablishedBefore);
+		}Catch(excp){
+		TEST_ASSERT_EQUAL(ERROR_ESTABLISHED,excp);
+		
+		return;
+		}
+
+}
+
 
 
