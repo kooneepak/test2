@@ -31,30 +31,44 @@ int Institution_reverse(LinkedList *inputList , LinkedList *outputList){
 }
 	
 int isUniversityCollege(void *elem1 , void *type){
-	
-	if(((Institution *)elem1)->type== (InstitutionType *)type)
-		return 1;
-	else
-	return 0;
 
+
+	Institution *tempElem = (Institution *) elem1;
+	InstitutionType *newType = (InstitutionType *) type;
+	if(tempElem->type == *newType)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 
 }
 
 int Institution_select(LinkedList *inputList , LinkedList *outputList, void *criterion, int(*compare)(void*,void*)){
 
-
+	void *inst;
+	int count = 0; 
+	int j;
+	void *newType = criterion; 
 	
-
-
-
+	
+	inst = List_removeHead(inputList);
+	while(inst != NULL){
+		if(compare(inst , newType)){
+			Stack_push(&stack,inst);
+			count++;
+		}
+		inst = List_removeHead(inputList);
+	}
+	
+	for(j = 0; j < count; j++) {
+	inst = Stack_pop(&stack);
+	List_addTail(outputList,inst);
+	}
+	
 }
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

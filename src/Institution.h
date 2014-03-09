@@ -20,6 +20,7 @@ typedef struct Institution_t{
 
 int Institution_reverse(LinkedList *inputList , LinkedList *outputList);
 int Institution_select(LinkedList *inputList , LinkedList *outputList, void *criterion, int(*compare)(void*,void*));
+int isUniversityCollege(void *elem1 , void *type);
 
 
 #endif // __INSTITUTION_H__
